@@ -3,11 +3,6 @@
 
 Welcome to my Emacs configuration. It is very much a work in progress.
 * Table of Contents :toc_3:
-- [[#todo][Todo]]
-  - [[#finish-dashboard][Finish dashboard]]
-  - [[#auto-load-lsp-when-opening-supported-files][Auto-load LSP when opening supported files]]
-  - [[#add-more-language-servers][Add more language servers]]
-  - [[#learn-and-properly-utilise-dired][Learn and properly utilise dired]]
 - [[#initial-configuration][Initial Configuration]]
   - [[#disclaimer][Disclaimer]]
   - [[#startup-performance][Startup Performance]]
@@ -56,26 +51,6 @@ Welcome to my Emacs configuration. It is very much a work in progress.
   - [[#reload-emacs][Reload Emacs]]
 - [[#extras][Extras]]
   - [[#runtime-performance][Runtime Performance]]
-
-* Todo
-** TODO Finish dashboard
-- [ ] Make some nice logo/graphic
-
-** TODO Auto-load LSP when opening supported files
-
-** TODO Add more language servers
-- [X] Python
-- [ ] JavaScript/TypeScript
-- [ ] Go
-- [ ] Haskell
-- [ ] Yuck
-- [ ] Nix
-- [ ] HTML
-- [X] C++
-- [ ] CSS + SASS/SCSS
-
-** TODO Learn and properly utilise dired
-Look up resources on YouTube, etc.
 
 * Initial Configuration
 ** Disclaimer

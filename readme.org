@@ -1,0 +1,21 @@
+#+title: Emacs Configuration README
+* Welcome
+This configuration is very much a learning experience, and I am aware that there are a lot of things wrong with it. If you think you can help me improve it, feel free to make an issue/pr!
+
+[[file:config.org][Click here to open config.org]]
+
+If you're interested, [[https://github.com/skiletro/nixfiles][here]] is my Nix flake!
+
+* Aims of This Configuration
+There are a few things that I would like to achieve with this config.
++ *Cross-platform* - Works vaguely the same on both Windows and Linux. I personally don't use macOS so it won't be supported here.
++ *NixOS-first* - My daily driver OS is NixOS, so everything is mainly tailored for that, however as mentioned prior, Windows is also being taken into consideration
++ *Simple* - I don't want a ton of different packages, and if I can replace a custom package with one that is built into Emacs without compromising features, then I will.
+  
+* Todo
+- [ ] Document everything, and split snippets of el wherever needed
+- [ ] Customised dashboard
+- [ ] Auto-load LSP-mode when opening supported files
+- [ ] Add more language servers
+- [ ] Learn and properly utilise ~dired~
+- [ ] Research into replacing ~Projectile~ with ~project.el~
