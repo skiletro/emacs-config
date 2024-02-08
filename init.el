@@ -361,6 +361,11 @@
   :commands (magit-status magit-get-current-branch)
   :custom
   (magit-display-buffer function #'magit-display-buffer-same-window-except-diff-v1))
+(skil/leader-keys
+  "g"  '(:which-key "magit")
+  "gg" '(magit-status :which-key "Magit status")
+  "gG" '(magit-status-here :which-key "Magit status here")
+  "gR" '(magit-revert :which-key "Magit revert"))
 
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))

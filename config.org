@@ -565,6 +565,11 @@ The git porcelain! Allows for interaction with git using Emacs and its' bindings
     :commands (magit-status magit-get-current-branch)
     :custom
     (magit-display-buffer function #'magit-display-buffer-same-window-except-diff-v1))
+  (skil/leader-keys
+    "g"  '(:which-key "magit")
+    "gg" '(magit-status :which-key "Magit status")
+    "gG" '(magit-status-here :which-key "Magit status here")
+    "gR" '(magit-revert :which-key "Magit revert"))
 #+end_src
 
 ** Commenting
