@@ -75,7 +75,7 @@
 ;; Change window name to something simpler
 (setq frame-title-format "%b - Emacs")
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/oxocarbon-emacs/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/oxocarbon/")
 (use-package autothemer)
 (load-theme 'oxocarbon :no-confirm)
 
