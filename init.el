@@ -75,8 +75,9 @@
 ;; Change window name to something simpler
 (setq frame-title-format "%b - Emacs")
 
-(use-package catppuccin-theme
-  :init (load-theme 'catppuccin :no-confirm))
+(add-to-list 'custom-theme-load-path "~/.emacs.d/oxocarbon-emacs/")
+(use-package autothemer)
+(load-theme 'oxocarbon :no-confirm)
 
 (set-face-attribute 'default nil :font "Iosevka NF" :height 120)
 (set-face-attribute 'fixed-pitch nil :font "Iosevka NF" :height 120)

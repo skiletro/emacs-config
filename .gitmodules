@@ -1,0 +1,3 @@
+[submodule "oxocarbon-emacs"]
+	path = oxocarbon-emacs
+	url = https://github.com/thefossenjoyer/oxocarbon-emacs

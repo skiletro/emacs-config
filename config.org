@@ -159,8 +159,9 @@ This is a really useful section as it prints what is being loaded and when into 
 
 ** Theme Configuration
 #+begin_src emacs-lisp
-  (use-package catppuccin-theme
-    :init (load-theme 'catppuccin :no-confirm))
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/oxocarbon-emacs/")
+  (use-package autothemer)
+  (load-theme 'oxocarbon :no-confirm) 
 #+end_src
 
 ** Font Configuration
