@@ -26,6 +26,9 @@ Welcome to my Emacs configuration. It is very much a work in progress.
 - [[#help-commands][Help Commands]]
   - [[#helpful][Helpful]]
   - [[#evil-tutor][Evil Tutor]]
+- [[#other-major-modes][Other Major Modes]]
+  - [[#vterm][Vterm]]
+  - [[#pdf-tools][PDF Tools]]
 - [[#org-mode][Org Mode]]
   - [[#open-files-in-same-window][Open Files in Same Window]]
   - [[#org-modern][Org Modern]]
@@ -40,11 +43,14 @@ Welcome to my Emacs configuration. It is very much a work in progress.
   - [[#languages][Languages]]
     - [[#language-servers][Language Servers]]
     - [[#c][C++]]
+    - [[#latex][LaTeX]]
     - [[#python][Python]]
+  - [[#flycheck][Flycheck]]
   - [[#projectile][Projectile]]
   - [[#magit][Magit]]
   - [[#commenting][Commenting]]
   - [[#rainbow-delimiters][Rainbow Delimiters]]
+  - [[#ligatures][Ligatures]]
 - [[#functions][Functions]]
   - [[#new-empty-buffer][New Empty Buffer]]
   - [[#temporary-text-scaling][Temporary Text Scaling]]
@@ -166,8 +172,8 @@ This is a really useful section as it prints what is being loaded and when into 
 
 ** Font Configuration
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil :font "Iosevka NF" :height 120)
-  (set-face-attribute 'fixed-pitch nil :font "Iosevka NF" :height 120)
+  (set-face-attribute 'default nil :font "EnvyCodeR Nerd Font" :height 120)
+  (set-face-attribute 'fixed-pitch nil :font "EnvyCodeR Nerd Font" :height 120)
   (set-face-attribute 'variable-pitch nil :font "Bahnschrift" :height 120)
 #+end_src
 
@@ -176,17 +182,15 @@ Dashboard is a packge which creates, as the name suggests, a custom dashboard th
 
 #+begin_src emacs-lisp
   (use-package dashboard
-    :config (dashboard-setup-startup-hook))
+    :config
+    (dashboard-setup-startup-hook)
   (setq dashboard-buffer-name "*dashboard*"
         dashboard-banner-logo-title nil ; Subtitle
         dashboard-startup-banner 'logo
         dashboard-center-content t
-        dashboard-display-icons-p t
-        dashboard-set-heading-icons t
-        dashboard-set-file-icons t
         dashboard-items '((recents . 5)
                           (bookmarks . 3)
-                          (projects . 5)))
+                            (projects . 5))))
 #+end_src
 
 ** Modeline
@@ -333,6 +337,26 @@ Vimtutor adapted for Evil and wrapped in a major mode
 #+begin_src emacs-lisp
   (use-package evil-tutor
     :commands (evil-tutor-start))
+#+end_src
+
+* Other Major Modes
+** Vterm
+A fully-fledged terminal emulator. Doesn't work on Windows.
+
+#+begin_src emacs-lisp
+  (if (not (eq system-type 'windows-nt))
+      (progn
+        (use-package vterm
+          :commands (vterm))))
+#+end_src
+
+** PDF Tools
+Better PDF viewing
+
+#+begin_src emacs-lisp
+  (if (eq system-type 'gnu/linux)
+      (progn
+        (use-package pdf-tools)))
 #+end_src
 
 * Org Mode
@@ -528,6 +552,21 @@ For this language, an external package is required.
     :hook (c++-mode . lsp-deferred))
 #+end_src
 
+*** LaTeX
+For this language, an external package is required.
++ On NixOS, add the ~texlab~ package
++ On Windows, ~texlab~ is found in the Scoop repositories
++ On other distros, you will most likely need to use cargo to install it.
+
+#+begin_src emacs-lisp
+  (use-package lsp-latex
+    :after lsp
+    :hook
+    (tex-mode . lsp-deferred)
+    (latex-mode . lsp-deferred)
+    (bibtex-mode . lsp-deferred))
+#+end_src
+
 *** Python
 For this language, an external package is required.
 + On NixOS, add the ~nodePackages.pyright~ package
@@ -537,6 +576,14 @@ For this language, an external package is required.
   (use-package lsp-pyright
     :after lsp
     :hook (python-mode . lsp-deferred))
+#+end_src
+
+** Flycheck
+Syntax checking, a replacement for ~flymake~
+
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :init (global-flycheck-mode))
 #+end_src
 
 ** Projectile
@@ -587,6 +634,22 @@ Can also be referred to as rainbow brackets or rainbow parentheses, it colourise
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+
+** Ligatures
+This configuration snippet is from [[https://github.com/mickeynp/ligature.el/wiki#iosevka][here]] and is made for Iosevka.
+
+#+begin_src emacs-lisp
+  (use-package ligature
+    :config
+    ;; Enable all Iosevka ligatures in programming modes
+    (ligature-set-ligatures 'prog-mode '("<---" "<--"  "<<-" "<-" "->" "-->" "--->" "<->" "<-->" "<--->" "<---->" "<!--"
+                                         "<==" "<===" "<=" "=>" "=>>" "==>" "===>" ">=" "<=>" "<==>" "<===>" "<====>" "<!---"
+                                         "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "===" "!=="
+                                         ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "+:" "-:" "=:" "<******>" "++" "+++"))
+    ;; Enables ligature checks globally in all buffers. You can also do it
+    ;; per mode with `ligature-mode'.
+    (global-ligature-mode t))
 #+end_src
 
 * Functions

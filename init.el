@@ -1,7 +1,3 @@
-;; NOTE: init.el is generated using config.org. Please edit that file in Emacs.
-
-(setq gc-cons-threshold (* 85 1000 1000))
-
 ;; Initialise package sources
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
@@ -79,22 +75,20 @@
 (use-package autothemer)
 (load-theme 'oxocarbon :no-confirm)
 
-(set-face-attribute 'default nil :font "Iosevka NF" :height 120)
-(set-face-attribute 'fixed-pitch nil :font "Iosevka NF" :height 120)
+(set-face-attribute 'default nil :font "EnvyCodeR Nerd Font" :height 120)
+(set-face-attribute 'fixed-pitch nil :font "EnvyCodeR Nerd Font" :height 120)
 (set-face-attribute 'variable-pitch nil :font "Bahnschrift" :height 120)
 
 (use-package dashboard
-  :config (dashboard-setup-startup-hook))
+  :config
+  (dashboard-setup-startup-hook)
 (setq dashboard-buffer-name "*dashboard*"
       dashboard-banner-logo-title nil ; Subtitle
       dashboard-startup-banner 'logo
       dashboard-center-content t
-      dashboard-display-icons-p t
-      dashboard-set-heading-icons t
-      dashboard-set-file-icons t
       dashboard-items '((recents . 5)
                         (bookmarks . 3)
-                        (projects . 5)))
+                          (projects . 5))))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
@@ -208,6 +202,15 @@
 
 (use-package evil-tutor
   :commands (evil-tutor-start))
+
+(if (not (eq system-type 'windows-nt))
+    (progn
+      (use-package vterm
+        :commands (vterm))))
+
+(if (eq system-type 'gnu/linux)
+    (progn
+      (use-package pdf-tools)))
 
 (use-package org
   :commands (org-capture org-agenda)
@@ -340,9 +343,19 @@
   :after lsp
   :hook (c++-mode . lsp-deferred))
 
+(use-package lsp-latex
+  :after lsp
+  :hook
+  (tex-mode . lsp-deferred)
+  (latex-mode . lsp-deferred)
+  (bibtex-mode . lsp-deferred))
+
 (use-package lsp-pyright
   :after lsp
   :hook (python-mode . lsp-deferred))
+
+(use-package flycheck
+  :init (global-flycheck-mode))
 
 (use-package projectile
   :diminish projectile-mode
@@ -375,6 +388,17 @@
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package ligature
+  :config
+  ;; Enable all Iosevka ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode '("<---" "<--"  "<<-" "<-" "->" "-->" "--->" "<->" "<-->" "<--->" "<---->" "<!--"
+                                       "<==" "<===" "<=" "=>" "=>>" "==>" "===>" ">=" "<=>" "<==>" "<===>" "<====>" "<!---"
+                                       "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "===" "!=="
+                                       ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "+:" "-:" "=:" "<******>" "++" "+++"))
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
 
 (defun skil/new-empty-buffer ()
   "Create a new empty buffer."
