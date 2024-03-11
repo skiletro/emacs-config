@@ -22,6 +22,7 @@ Welcome to my Emacs configuration. It is very much a work in progress.
 - [[#keybindings][Keybindings]]
   - [[#generalel][General.el]]
   - [[#evil-mode][Evil Mode]]
+  - [[#switch-windows][Switch Windows]]
   - [[#pressing-esc-closes-prompts-properly][Pressing ESC Closes Prompts Properly]]
 - [[#help-commands][Help Commands]]
   - [[#helpful][Helpful]]
@@ -183,14 +184,15 @@ Dashboard is a packge which creates, as the name suggests, a custom dashboard th
 #+begin_src emacs-lisp
   (use-package dashboard
     :config
-    (dashboard-setup-startup-hook)
+    (dashboard-setup-startup-hook))
   (setq dashboard-buffer-name "*dashboard*"
         dashboard-banner-logo-title nil ; Subtitle
         dashboard-startup-banner 'logo
         dashboard-center-content t
         dashboard-items '((recents . 5)
                           (bookmarks . 3)
-                            (projects . 5))))
+                            (projects . 5)))
+  (setq inhibit-startup-screen t)
 #+end_src
 
 ** Modeline
@@ -301,6 +303,15 @@ This configuration uses evil-mode to emulate vim keybindings. General.el is also
     (define-key evil-motion-state-map (kbd "SPC") nil)
     (define-key evil-motion-state-map (kbd "RET") nil)
     (define-key evil-motion-state-map (kbd "TAB") nil))
+#+end_src
+
+** Switch Windows
+#+begin_src emacs-lisp
+  (use-package ace-window
+    :commands (ace-window))
+  (global-set-key (kbd "M-o") 'ace-window)
+  (skil/leader-keys
+    "b," '(ace-window :which-key "Switch window"))
 #+end_src
 
 ** Pressing ESC Closes Prompts Properly

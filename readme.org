@@ -13,10 +13,10 @@ There are a few things that I would like to achieve with this config.
 + *Simple* - I don't want a ton of different packages, and if I can replace a custom package with one that is built into Emacs without compromising features, then I will.
   
 * Todo
-- [ ] Fix ~oxocarbon~ theme (might have to create my own, who knows :shrug:)
-- [ ] Document everything, and split snippets of el wherever needed
-- [ ] Customised dashboard
-- [ ] Auto-load LSP-mode when opening supported files
-- [ ] Add more language servers
-- [ ] Learn and properly utilise ~dired~
-- [ ] Research into replacing ~Projectile~ with ~project.el~
+- Fix ~oxocarbon~ theme (might have to create my own, who knows :shrug:)
+- Document everything, and split snippets of el wherever needed
+- Customised dashboard
+- Auto-load LSP-mode when opening supported files
+- Add more language servers
+- Learn and properly utilise ~dired~
+- Research into replacing ~Projectile~ with ~project.el~

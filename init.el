@@ -1,3 +1,7 @@
+;; NOTE: init.el is generated using config.org. Please edit that file in Emacs.
+
+(setq gc-cons-threshold (* 85 1000 1000))
+
 ;; Initialise package sources
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
@@ -81,14 +85,15 @@
 
 (use-package dashboard
   :config
-  (dashboard-setup-startup-hook)
+  (dashboard-setup-startup-hook))
 (setq dashboard-buffer-name "*dashboard*"
       dashboard-banner-logo-title nil ; Subtitle
       dashboard-startup-banner 'logo
       dashboard-center-content t
       dashboard-items '((recents . 5)
                         (bookmarks . 3)
-                          (projects . 5))))
+                          (projects . 5)))
+(setq inhibit-startup-screen t)
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1))
@@ -180,6 +185,12 @@
   (define-key evil-motion-state-map (kbd "SPC") nil)
   (define-key evil-motion-state-map (kbd "RET") nil)
   (define-key evil-motion-state-map (kbd "TAB") nil))
+
+(use-package ace-window
+  :commands (ace-window))
+(global-set-key (kbd "M-o") 'ace-window)
+(skil/leader-keys
+  "b," '(ace-window :which-key "Switch window"))
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; Make ESC quit prompts
 
